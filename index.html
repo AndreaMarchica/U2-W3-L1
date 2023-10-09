@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Esercizi Javascript</title>
+  </head>
+  <body>
+    <h1>Registra qui il tuo animale!</h1>
+    <form
+      id="petForm"
+      style="display: flex; flex-direction: column; width: 30%"
+    >
+      <label for="petName">Nome dell'animale</label>
+      <input type="text" id="petName" required />
+      <label for="ownerName">Nome del proprietario</label>
+      <input type="text" id="ownerName" required />
+      <label for="species">Specie</label>
+      <input type="text" id="species" required />
+      <label for="breed">Razza</label>
+      <input type="text" id="breed" required />
+      <button type="submit">Registra</button>
+    </form>
+    <h2>Animali registrati</h2>
+    <ul id="petList"></ul>
+    <script>
+      //ESERCIZIO 1
+      class User {
+        constructor(_firstName, _lastName, _age, _location) {
+          this._firstName = _firstName;
+          this._lastName = _lastName;
+          this.age = _age;
+          this._location = _location;
+        }
+        compareAge(otherAge) {
+          if (this.age > otherAge.age) {
+            return `${this._lastName} è più grande di ${otherAge._lastName}`;
+          } else if (this.age < otherAge.age) {
+            return `${this._lastName} è più piccolo di ${otherAge._lastName}`;
+          } else {
+            return `${this._lastName} ha la stessa età di ${otherAge._lastName}`;
+          }
+        }
+      }
+
+      const userX = new User("Max", "Verstappen", 26, "Netherlands");
+      const userY = new User("Charles", "Leclerc", 25, "Monaco");
+
+      console.log(userX.compareAge(userY));
+
+      //   ESERCIZIO 2
+      //   class Pet {
+      //     constructor(_petName, _ownerName, _species, _breed) {
+      //       this.petName = _petName;
+      //       this.ownerName = _ownerName;
+      //       this.species = _species;
+      //       this.breed = _breed;
+      //     }
+      //   }
+      //   CON LA CLASSE NON CAPISCO COME FARE
+
+      function createPet(petName, ownerName, species, breed) {
+        return {
+          petName: petName,
+          ownerName: ownerName,
+          species: species,
+          breed: breed,
+        };
+      }
+
+      document
+        .getElementById("petForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const petName = document.getElementById("petName").value;
+          const ownerName = document.getElementById("ownerName").value;
+          const species = document.getElementById("species").value;
+          const breed = document.getElementById("breed").value;
+          const pet = createPet(petName, ownerName, species, breed);
+          const petList = document.getElementById("petList");
+          const listItem = document.createElement("li");
+          listItem.textContent = `Nome: ${pet.petName}, Nome del proprietario: ${pet.ownerName}, Specie: ${pet.species}, Razza: ${pet.breed}`;
+          petList.appendChild(listItem);
+          document.getElementById("petForm").reset();
+
+          // compareOwner (otherOwner){
+          // if (this.ownerName === otherOwner.ownerName)
+          //   {return true;}
+          //  else
+          //   {return false};
+          // }
+          //   Stefano aiutami tu!
+        });
+    </script>
+  </body>
+</html>
